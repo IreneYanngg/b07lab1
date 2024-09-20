@@ -25,7 +25,7 @@ public class Polynomial{
 				a = coefficients[i];
 			}
 			double b = 0;
-			if (i < new_co.length) {
+			if (i < to_add.coefficients.length) {
 				b = to_add.coefficients[i];
 			}
 			
