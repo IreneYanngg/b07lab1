@@ -1,7 +1,5 @@
-// sep 25th 2:01
-import java.util.HashMap;
 // sep 25th 7:06
-
+import java.util.HashMap;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
