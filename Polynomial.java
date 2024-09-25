@@ -1,3 +1,4 @@
+// sep 25th 2:01
 import java.util.HashMap;
 import java.io.File;
 import java.util.ArrayList;
@@ -98,12 +99,8 @@ public class Polynomial{
 						new_co[i] += to_add.coefficients[j];
 					}
 				}
-		
-				
-			}
-			
-		} else {
-			
+			}	
+		} else {	
 			for(int i = 0; i < to_add.coefficients.length; i++) {
 				new_co[i] = to_add.coefficients[i];
 				new_exp[i] = to_add.exponents[i];
@@ -111,10 +108,28 @@ public class Polynomial{
 					new_co[i] += this.coefficients[j];
 				}
 			}
-			
 		}
 		
-		Polynomial new_poly = new Polynomial(new_co, new_exp);
+		int non_zero = 0;
+	    for (int i = 0; i < new_co.length; i++) {
+	        if (new_co[i] != 0) {
+	        	non_zero++;
+	        }
+	    }
+	    
+	    double[] result_co = new double[non_zero];
+		int[] result_exp = new int[non_zero];
+		
+		int index = 0;
+		for (int i = 0; i < new_co.length; i++) {
+	        if (new_co[i] != 0) {
+	            result_co[index] = new_co[i];
+	            result_exp[index] = new_exp[i];
+	            index++;
+	        }
+		}
+		
+		Polynomial new_poly = new Polynomial(result_co, result_exp);
 		
 		return new_poly;
 	}
