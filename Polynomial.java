@@ -1,5 +1,7 @@
 // sep 25th 2:01
 import java.util.HashMap;
+// sep 25th 7:06
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -15,8 +17,8 @@ public class Polynomial{
 	
 	// constructor
 	public Polynomial() {
-		this.coefficients = new double[] {0};
-		this.exponents = new int[] {0};
+		this.coefficients = new double[0];
+		this.exponents = new int[0];
 	}
 	
 	public Polynomial(double[] coeff, int[] expo) {
@@ -30,8 +32,8 @@ public class Polynomial{
 	
 	// constructor that takes an argument of type File
 	public Polynomial(File file) throws FileNotFoundException {
-		ArrayList<Double> co_list = new ArrayList<>(); // '<>()'中的'<>'菱形操作符可以用来避免重复指定数据类型
-		ArrayList<Integer> exp_list = new ArrayList<>(); // 左边指定为type double了右边就不用再指定一次了
+		ArrayList<Double> co_list = new ArrayList<>();
+		ArrayList<Integer> exp_list = new ArrayList<>();
 		
 		Scanner input_file = new Scanner(file);
 		String poly_string = input_file.nextLine();
@@ -117,6 +119,8 @@ public class Polynomial{
 	        }
 	    }
 	    
+	    
+	    // delete coefficients with value 0 and the corresponding exponents
 	    double[] result_co = new double[non_zero];
 		int[] result_exp = new int[non_zero];
 		
@@ -223,13 +227,21 @@ public class Polynomial{
 			double cur_coeff = this.coefficients[i];
 			int cur_exp = this.exponents[i];
 			
-			if(cur_coeff < 0) // cur_coeff < 0
+			if(cur_coeff < 0 && cur_coeff != -1) // cur_coeff < 0
 				poly_str.append(cur_coeff);
+			else if(cur_coeff == -1)
+				poly_str.append("-");
 			else { // cur_coeff > 0
-				if(i == 0) poly_str.append(cur_coeff);
-				else poly_str.append("+").append(cur_coeff);
+				if(i == 0) {
+					if(cur_coeff != 1) poly_str.append(cur_coeff);
+				} else {
+					poly_str.append("+");
+					if(cur_coeff != 1) poly_str.append(cur_coeff);
+				}
 			}
 			
+			if(cur_exp == 0 && (cur_coeff == 1 || cur_coeff == -1))
+				poly_str.append("1");
 			if(cur_exp == 1)
 				poly_str.append("x");
 			else if(cur_exp > 1)
