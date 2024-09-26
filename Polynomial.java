@@ -1,4 +1,4 @@
-// sep 25th 7:06
+// sep 26th
 import java.util.HashMap;
 import java.io.File;
 import java.util.ArrayList;
@@ -139,7 +139,7 @@ public class Polynomial{
 	public double evaluate(double x) {
 		double result = 0;
 		for(int i = 0; i < this.coefficients.length; i++) {
-			result = result + this.coefficients[i] * Math.pow(x,exponents[i]);
+			result = result + this.coefficients[i] * Math.pow(x,this.exponents[i]);
 		}
 		
 		return result;
@@ -208,7 +208,28 @@ public class Polynomial{
 			result_exp[i] = cur_exp;
 		}
 		
-		Polynomial result = new Polynomial(result_co, result_exp);
+		// delete coefficients with value 0 and the corresponding exponents
+		int non_zero = 0;
+	    for (int i = 0; i < result_len; i++) {
+	        if (result_co[i] != 0) {
+	        	non_zero++;
+	        }
+	    }
+	    
+	    double[] final_co = new double[non_zero];
+		int[] final_exp = new int[non_zero];
+		
+		int index = 0;
+		for (int i = 0; i < result_len; i++) {
+	        if (result_co[i] != 0) {
+	            final_co[index] = result_co[i];
+	            final_exp[index] = result_exp[i];
+	            index++;
+	        }
+		}
+		
+		
+		Polynomial result = new Polynomial(final_co, final_exp);
 		return result;
 		
 	}

@@ -1,4 +1,4 @@
-// sep 25th 7:06
+// sep 26th
 
 import java.io.IOException;
 
@@ -48,6 +48,29 @@ public class Driver {
         // Test Case 5: 多项式相乘
         Polynomial product = p1.multiply(p3);  // p1 * p3
         System.out.println("Product of p1 and p3 (x=1) [outputs 6]: " + product.evaluate(1));  // outputs 6
+        try {
+        	product.saveToFile("/Users/ireneyang/Desktop/CSCB07/Labs/b07lab1/polynomial_multiply.txt");
+            System.out.println("Polynomial p1*p3 saved to polynomial_multiply.txt");
+        } catch (IOException e) {
+            System.out.println("Failed to save polynomial p1*p3 to file.");
+        }
+        
+        double[] co_multi_1 = {2, 1, -4, 1};
+        int[] exp_mult1_1 = {2, 0, 3, 1};
+        Polynomial p_multi_1 = new Polynomial(co_multi_1, exp_mult1_1); // 2x2+1-4x3+x
+        double[] co_multi_2 = {2, 1, 1};
+        int[] exp_mult1_2 = {1, 4, 0};
+        Polynomial p_multi_2 = new Polynomial(co_multi_2, exp_mult1_2); // 2x+x4+1
+        Polynomial product_2 = p_multi_1.multiply(p_multi_2); // -4x7+2x6+x5-7x4+4x2+3x+1
+        
+        try {
+        	product_2.saveToFile("/Users/ireneyang/Desktop/CSCB07/Labs/b07lab1/polynomial_multiply_0.txt");
+            System.out.println("Polynomial p_multi_1*p_multi_2 saved to polynomial_multiply_0.txt");
+        } catch (IOException e) {
+            System.out.println("Failed to save polynomial p_multi_1*p_multi_2 to file.");
+        }
+        
+        
 
 
         // Test Case 6: 测试删除 0 系数的项
@@ -55,7 +78,7 @@ public class Driver {
         int[] exp4 = {2, 0};
         Polynomial p4 = new Polynomial(co4, exp4);
         Polynomial sumWithZeros = p1.add(p4); 
-        System.out.println("Sum of p1 and p4 (evaluated at x=1): " + sumWithZeros.evaluate(1));
+        System.out.println("Sum of p1 and p4 (evaluated at x=1) [outputs 3]: " + sumWithZeros.evaluate(1));
         try {
         	sumWithZeros.saveToFile("/Users/ireneyang/Desktop/CSCB07/Labs/b07lab1/polynomial_add.txt");
             System.out.println("Polynomial p1+p4 saved to polynomial_add.txt");
@@ -136,8 +159,16 @@ public class Driver {
         // Test Case 9: 空多项式测试 【no-argument constructor相关】
         Polynomial emptyPoly = new Polynomial();  // 空的多项式
         System.out.println("Empty polynomial evaluated at x=1: " + emptyPoly.evaluate(1));  // 应该输出 0
+        
+        try {
+        	emptyPoly.saveToFile("/Users/ireneyang/Desktop/CSCB07/Labs/b07lab1/polynomial_empty.txt");
+            System.out.println("Polynomial emptyPoly saved to polynomial_empty.txt");
+        } catch (IOException e) {
+            System.out.println("Failed to save polynomial p1 to file.");
+        }
 		
 	}
 	
 	
 }
+
